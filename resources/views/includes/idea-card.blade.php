@@ -2,7 +2,8 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img style="width:50px" class="me-2 avatar-sm rounded-circle" src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                <img style="width:50px" class="me-2 avatar-sm rounded-circle"
+                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                 <div>
                     <h5 class="card-title mb-0"><a href="#"> Mario
                         </a></h5>
@@ -12,7 +13,8 @@
                 <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                     @csrf
                     @method('delete')
-                    <button class="btn btn-danger btn-sm">X</button>
+                    <a href="{{ route('ideas.view.show', $idea->id) }}">View</a>
+                    <button class="ms-1 btn btn-danger btn-sm">X</button>
                 </form>
             </div>
         </div>
@@ -41,7 +43,8 @@
 
             <hr>
             <div class="d-flex align-items-start">
-                <img style="width:35px" class="me-2 avatar-sm rounded-circle" src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">
+                <img style="width:35px" class="me-2 avatar-sm rounded-circle"
+                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">
                 <div class="w-100">
                     <div class="d-flex justify-content-between">
                         <h6 class="">Luigi
