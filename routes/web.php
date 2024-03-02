@@ -22,6 +22,10 @@ Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
 
 Route::get('/ideas/view/{idea}', [IdeaController::class, 'show'])->name('ideas.view.show');
 
+Route::get('/ideas/view/edit/{idea}', [IdeaController::class, 'edit'])->name('ideas.view.edit');
+
+Route::put('/ideas/view/{idea}', [IdeaController::class, 'update'])->name('ideas.view.update');
+
 Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
 
 // Route::get('/terms', function(){
