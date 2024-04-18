@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\PageNavigationController;
@@ -28,9 +29,7 @@ Route::put('/ideas/view/{idea}', [IdeaController::class, 'update'])->name('ideas
 
 Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
 
-// Route::get('/terms', function(){
-//     return view('terms');
-// });
+Route::post('/ideas/comments/{idea}', [CommentController::class, 'store'])->name('ideas.comments.store');
 
 // PAGE NAVIGATIONS
 Route::get('/terms', [PageNavigationController::class, 'termsNav']);
