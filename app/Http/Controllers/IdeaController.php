@@ -9,15 +9,28 @@ class IdeaController extends Controller
 {
     public function store()
     {
-        request()->validate([
-            'idea-content' => 'required|min:3|max:240'
+        //OLD VERSION VALIDATION AND CREATE
+
+        // request()->validate([
+        //     'idea-content' => 'required|min:3|max:240'
+        // ]);
+
+        // $idea = Idea::create(
+        //     [
+        //         'content' => request()->get('idea-content', ''),
+        //     ]
+        // );
+
+        //NEW VERSION VALIDATION AND CREATE
+
+        $validated = request()->validate([
+            'content' => 'required|min:3|max:240'
+        ], [
+            'content.required' => 'The content field is required' //My custom validation text
         ]);
 
-        $idea = Idea::create(
-            [
-                'content' => request()->get('idea-content', ''),
-            ]
-        );
+        Idea::create($validated);
+
 
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
