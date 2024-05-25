@@ -29,6 +29,8 @@ class IdeaController extends Controller
             'content.required' => 'The content field is required' //My custom validation text
         ]);
 
+        $validated['user_id'] = auth()->id();
+
         Idea::create($validated);
 
 

@@ -22,20 +22,20 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
-    Route::get('/ideas/view/{idea}', [IdeaController::class, 'show'])->name('ideas.view.show');
     Route::get('/ideas/view/edit/{idea}', [IdeaController::class, 'edit'])->name('ideas.view.edit');
     Route::put('/ideas/view/{idea}', [IdeaController::class, 'update'])->name('ideas.view.update');
     Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
     Route::post('/ideas/comments/{idea}', [CommentController::class, 'store'])->name('ideas.comments.store');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // PAGE NAVIGATIONS
-    Route::get('/terms', [PageNavigationController::class, 'termsNav']);
-    Route::get('/explore', [PageNavigationController::class, 'exploreNav']);
 });
+Route::get('/ideas/view/{idea}', [IdeaController::class, 'show'])->name('ideas.view.show');
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store']);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
+
+// PAGE NAVIGATIONS
+Route::get('/terms', [PageNavigationController::class, 'termsNav']);
+Route::get('/explore', [PageNavigationController::class, 'exploreNav']);

@@ -19,8 +19,8 @@ class AuthController extends Controller
             [
                 'name' => 'required|min:3|max:40',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:8',
-                'password_confirmation' => 'required|min:8|confirmed'
+                'password' => 'required|min:8|confirmed',
+                'password_confirmation' => 'required|min:8'
             ],
             [
                 'password_confirmation' => 'The password field confirmation does not match.'
