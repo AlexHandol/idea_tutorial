@@ -10,13 +10,15 @@
             <h4>Share yours ideas</h4>
             @include('includes.submit-idea')
             <hr>
-            @foreach ($ideas as $idea)
+            @forelse ($ideas as $idea)
                 <div class="mt-3">
                     @include('includes.idea-card')
                 </div>
-            @endforeach
+            @empty
+            <p class="text-center mt-4">No results Found.</p>
+            @endforelse
             <div class="mt-3">
-                {{ $ideas->links() }}
+                {{ $ideas->withQueryString()->links() }}
             </div>
         </div>
         <div class="col-3">
