@@ -15,11 +15,11 @@
                     @csrf
                     @method('delete')
                     @auth
-                        <a class="ms-1" href="{{ route('ideas.view.edit', $idea->id) }}">Edit</a>
-                        <a href="{{ route('ideas.view.show', $idea->id) }}">View</a>
+                        <a class="ms-1" href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                        <a href="{{ route('ideas.show', $idea->id) }}">View</a>
                         <button class="ms-1 btn btn-danger btn-sm">X</button>
                     @else
-                        <a href="{{ route('ideas.view.show', $idea->id) }}">View</a>
+                        <a href="{{ route('ideas.show', $idea->id) }}">View</a>
                     @endauth
                 </form>
             </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="card-body">
         @if ($editing ?? false)
-            <form action="{{ route('ideas.view.update', $idea->id) }}" method="POST">
+            <form action="{{ route('ideas.update', $idea->id) }}" method="POST">
                 @csrf
                 @method('put')
                 <div class="mb-3">

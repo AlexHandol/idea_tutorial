@@ -9,20 +9,6 @@ class IdeaController extends Controller
 {
     public function store()
     {
-        //OLD VERSION VALIDATION AND CREATE
-
-        // request()->validate([
-        //     'idea-content' => 'required|min:3|max:240'
-        // ]);
-
-        // $idea = Idea::create(
-        //     [
-        //         'content' => request()->get('idea-content', ''),
-        //     ]
-        // );
-
-        //NEW VERSION VALIDATION AND CREATE
-
         $validated = request()->validate([
             'content' => 'required|min:3|max:240'
         ], [
@@ -33,20 +19,19 @@ class IdeaController extends Controller
 
         Idea::create($validated);
 
-
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
 
     public function show(Idea $idea)
     {
-        return view('ideas.view.show', compact('idea'));
+        return view('ideas.show', compact('idea'));
     }
 
     public function edit(Idea $idea)
     {
         $editing = true;
 
-        return view('ideas.view.show', compact('idea', 'editing'));
+        return view('ideas.show', compact('idea', 'editing'));
     }
 
     public function update(Idea $idea)
@@ -58,7 +43,7 @@ class IdeaController extends Controller
         $idea->content = request()->get('idea-content', '');
         $idea->save();
 
-        return redirect()->route('ideas.view.show', $idea->id)->with('success', 'Idea updated successfully!');
+        return redirect()->route('ideas.show', $idea->id)->with('success', 'Idea updated successfully!');
     }
 
     public function destroy(Idea $idea)
