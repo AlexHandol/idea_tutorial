@@ -38,6 +38,8 @@ Route::resource('ideas.comments', CommentController::class)->only(['store']);
 
 Route::resource('users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
 
+Route::get('profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
+
 // PAGE NAVIGATIONS
 Route::get('/terms', [PageNavigationController::class, 'termsNav']);
 Route::get('/explore', [PageNavigationController::class, 'exploreNav']);
