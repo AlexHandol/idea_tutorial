@@ -2,12 +2,12 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
+                <img style="width:50px" class="me-2 avatar-sm rounded-circle" src="{{ $idea->user->getImageURL() }}"
                     alt="{{ $idea->user->name }}">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}
-                        </a></h5>
+                    <h5 class="card-title mb-0">
+                        <a href="{{ route('users.show', $idea->user->id) }}">{{ $idea->user->name }}</a>
+                    </h5>
                 </div>
             </div>
             <div>
@@ -15,11 +15,11 @@
                     @csrf
                     @method('delete')
                     @auth
-                        <a class="ms-1" href="{{ route('ideas.view.edit', $idea->id) }}">Edit</a>
-                        <a href="{{ route('ideas.view.show', $idea->id) }}">View</a>
+                        <a class="ms-1" href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                        <a href="{{ route('ideas.show', $idea->id) }}">View</a>
                         <button class="ms-1 btn btn-danger btn-sm">X</button>
                     @else
-                        <a href="{{ route('ideas.view.show', $idea->id) }}">View</a>
+                        <a href="{{ route('ideas.show', $idea->id) }}">View</a>
                     @endauth
                 </form>
             </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="card-body">
         @if ($editing ?? false)
-            <form action="{{ route('ideas.view.update', $idea->id) }}" method="POST">
+            <form action="{{ route('ideas.update', $idea->id) }}" method="POST">
                 @csrf
                 @method('put')
                 <div class="mb-3">

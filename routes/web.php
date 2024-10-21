@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\PageNavigationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +21,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
-    Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
-    Route::get('/ideas/view/{idea}', [IdeaController::class, 'show'])->name('ideas.view.show')->withoutMiddleware(['auth']);
-    Route::get('/ideas/view/edit/{idea}', [IdeaController::class, 'edit'])->name('ideas.view.edit');
-    Route::put('/ideas/view/{idea}', [IdeaController::class, 'update'])->name('ideas.view.update');
-    Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
-    Route::post('/ideas/comments/{idea}', [CommentController::class, 'store'])->name('ideas.comments.store');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
+//     Route::get('/ideas/view/{idea}', [IdeaController::class, 'show'])->name('ideas.show')->withoutMiddleware(['auth']);
+//     Route::get('/ideas/edit/{idea}', [IdeaController::class, 'edit'])->name('ideas.edit');
+//     Route::put('/ideas/view/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
+//     Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
+//     Route::post('/ideas/comments/{idea}', [CommentController::class, 'store'])->name('ideas.comments.store');
+// });
+
+Route::resource('ideas', IdeaController::class)->except(['index', 'create', 'show'])->middleware('auth');
+
+Route::resource('ideas', IdeaController::class)->only(['show']);
+
+Route::resource('ideas.comments', CommentController::class)->only(['store']);
+
+Route::resource('users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
+
+Route::get('profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 
 // PAGE NAVIGATIONS
 Route::get('/terms', [PageNavigationController::class, 'termsNav']);
